@@ -67,7 +67,7 @@
 				<div class="row oneandhalf">
 					<div class="3u">
 						<a href="inventory-details.php?name=millerlite">
-						<section class="highlight">
+						<section class="highlight list">
 							<span class="section-link"></span>
 							<a class="image featured"><img src="images/lite_logo.png" alt="" /></a>
 							<h3>Miller Lite</h3>
@@ -78,7 +78,7 @@
 					<hr class="mobile-rule" />
 					<div class="3u">
 						<a href="inventory-details.php?name=samadamsbostonlager">
-						<section class="highlight">
+						<section class="highlight list">
 							<span class="section-link"></span>
 							<a href="#" class="image featured"><img src="images/sam-adams-beer.jpg" alt="" /></a>
 							<h3>Sam Adams Boston Lager</h3>
@@ -89,7 +89,7 @@
 					<hr class="mobile-rule" />
 					<div class="3u">
 						<a href="inventory-details.php?name=corona">
-						<section class="highlight">
+						<section class="highlight list">
 							<span class="section-link"></span>
 							<a href="#" class="image featured"><img src="images/Corona-Logo.jpg" alt="" /></a>
 							<h3>Corona Extra</h3>
@@ -100,7 +100,7 @@
 					<hr class="mobile-rule" />
 					<div class="3u">
 						<a href="inventory-details.php?name=mikeshard">
-						<section class="highlight">
+						<section class="highlight list">
 							<span class="section-link"></span>
 							<a href="#" class="image featured"><img src="images/Mikes_newlogo.jpg" alt="" /></a>
 							<h3>Mike's Hard</h3>

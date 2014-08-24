@@ -45,29 +45,32 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 		<?php
 
-			$product_id = $_GET['id']; //the product id from the URL
-			$action = $_GET['action']; //the action from the URL
+			if (isset($_GET['id']))
+			{
+				$product_id = $_GET['id']; //the product id from the URL
+				$action = $_GET['action']; //the action from the URL
 
-			//if there is an product_id and that product_id doesn't exist display an error message
-			//if($product_id && !productExists($product_id)) {
-			//	die("Error. Product Doesn't Exist");
-			//}
+				//if there is an product_id and that product_id doesn't exist display an error message
+				//if($product_id && !productExists($product_id)) {
+				//	die("Error. Product Doesn't Exist");
+				//}
 
-			switch($action) { //decide what to do
+				switch($action) { //decide what to do
 
-				case "add":
-					$_SESSION['cart'][$product_id]++; //add one to the quantity of the product with id $product_id
-				break;
+					case "add":
+						$_SESSION['cart'][$product_id]++; //add one to the quantity of the product with id $product_id
+					break;
 
-				case "remove":
-					$_SESSION['cart'][$product_id]--; //remove one from the quantity of the product with id $product_id
-					if($_SESSION['cart'][$product_id] == 0) unset($_SESSION['cart'][$product_id]); //if the quantity is zero, remove it completely (using the 'unset' function) - otherwise is will show zero, then -1, -2 etc when the user keeps removing items.
-				break;
+					case "remove":
+						$_SESSION['cart'][$product_id]--; //remove one from the quantity of the product with id $product_id
+						if($_SESSION['cart'][$product_id] == 0) unset($_SESSION['cart'][$product_id]); //if the quantity is zero, remove it completely (using the 'unset' function) - otherwise is will show zero, then -1, -2 etc when the user keeps removing items.
+					break;
 
-				case "empty":
-					unset($_SESSION['cart']); //unset the whole cart, i.e. empty the cart.
-				break;
+					case "empty":
+						unset($_SESSION['cart']); //unset the whole cart, i.e. empty the cart.
+					break;
 
+				}
 			}
 
 		?>
@@ -97,8 +100,6 @@
 
 					if($_SESSION['cart']) { //if the cart isn't empty
 					//show the cart
-
-						//echo "<table border=\"1\" padding=\"3\" width=\"40%\">"; //format the cart using a HTML table
 
 						//iterate through the cart, the $product_id is the key and $quantity is the value
 						foreach($_SESSION['cart'] as $product_id => $quantity) {
@@ -144,8 +145,10 @@
 					}
 					?>
 				</div>
-				<?php if($_SESSION['cart']) { echo "<a class=\"button big style1\" href=\"#\">Checkout</a>"; }?>
-				<a class="button big style1" href="inventory.php">Keep Shopping</a>
+				<ul class="actions">
+					<?php if($_SESSION['cart']) { echo "<li><a class=\"button big style1\" href=\"#\">Checkout</a></li>"; }?>
+					<li><a class="button big style1" href="inventory.php">Keep Shopping</a></li>
+				</ul>
 			</div>
 
 		<?php include 'footer.php'; ?>
