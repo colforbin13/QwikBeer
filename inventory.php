@@ -1,4 +1,24 @@
-<?php session_start(); ?>
+<?php
+
+    // First we execute our common code to connect to the database and start the session
+    require("common.php");
+
+    // At the top of the page we check to see whether the user is logged in or not
+    if(empty($_SESSION['user']))
+    {
+        // If they are not, we redirect them to the login page.
+        header("Location: login.php");
+
+        // Remember that this die statement is absolutely critical.  Without it,
+        // people can view your members-only content without logging in.
+        die("Redirecting to login.php");
+    }
+
+    // Everything below this point in the file is secured by the login system
+
+    // We can display the user's username to them by reading it from the session array.  Remember that because
+    // a username is user submitted content we must use htmlentities on it before displaying it to the user.
+?>
 <!DOCTYPE HTML>
 <!--
 	Escape Velocity by HTML5 UP
@@ -23,14 +43,6 @@
 			<link rel="stylesheet" href="css/style-desktop.css" />
 		</noscript>
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-		<?php
-			if ($_POST['username']) {
-				$loggedUser = ', ' . $_POST['username'];
-			}
-			else {
-				$loggedUser = '';
-			}
-		?>
 	</head>
 	<body class="homepage">
 
@@ -51,7 +63,7 @@
 
 		<!-- Intro -->
 			<div id="intro-wrapper" class="wrapper style3">
-				<div class="title">Pick your drinks<?php echo $loggedUser; ?></div>
+				<div class="title">Pick your drinks, <?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></div>
 				<div class="row oneandhalf">
 					<div class="3u">
 						<a href="inventory-details.php?name=millerlite">

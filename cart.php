@@ -1,4 +1,24 @@
-<?php session_start(); ?>
+<?php
+
+    // First we execute our common code to connect to the database and start the session
+    require("common.php");
+
+    // At the top of the page we check to see whether the user is logged in or not
+    if(empty($_SESSION['user']))
+    {
+        // If they are not, we redirect them to the login page.
+        header("Location: login.php");
+
+        // Remember that this die statement is absolutely critical.  Without it,
+        // people can view your members-only content without logging in.
+        die("Redirecting to login.php");
+    }
+
+    // Everything below this point in the file is secured by the login system
+
+    // We can display the user's username to them by reading it from the session array.  Remember that because
+    // a username is user submitted content we must use htmlentities on it before displaying it to the user.
+?>
 <!DOCTYPE HTML>
 <!--
 	Escape Velocity by HTML5 UP
@@ -71,7 +91,7 @@
 
 		<!-- Intro -->
 			<div id="intro-wrapper" class="wrapper style3">
-				<div class="title">Your Cart<?php echo $loggedUser; ?></div>
+				<div class="title">Your Cart, <?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></div>
 				<div class="row oneandhalf">
 				<?php
 
@@ -119,11 +139,13 @@
 
 					}else{
 					//otherwise tell the user they have no items in their cart
-						echo "Your cart is empty. What are you waiting for? <a href=\"inventory.php\">Go pick something!</a>";
+						echo "Your cart is empty. What are you waiting for? ";
 
 					}
 					?>
 				</div>
+				<?php if($_SESSION['cart']) { echo "<a class=\"button big style1\" href=\"#\">Checkout</a>"; }?>
+				<a class="button big style1" href="inventory.php">Keep Shopping</a>
 			</div>
 
 		<?php include 'footer.php'; ?>

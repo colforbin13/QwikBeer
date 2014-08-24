@@ -56,7 +56,7 @@
 					liquor store will delivery your order quickly and safely, and you won't ever have to leave the comfort of your
 					own home!</p>
 					<ul class="actions">
-						<li><a href="login.php" class="button style1 big">Order Now</a></li>
+						<li><a href="inventory.php" class="button style1 big">Order Now</a></li>
 					</ul>
 				</section>
 			</div>
