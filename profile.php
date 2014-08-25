@@ -216,6 +216,34 @@
 		// the user's details.
 		$_SESSION['user'] = $row;
 	}
+	
+	$states_arr = array('AL'=>"Alabama",'AK'=>"Alaska",'AZ'=>"Arizona",'AR'=>"Arkansas",
+						'CA'=>"California",'CO'=>"Colorado",'CT'=>"Connecticut",'DE'=>"Delaware",
+						'DC'=>"District Of Columbia",'FL'=>"Florida",'GA'=>"Georgia",'HI'=>"Hawaii",
+						'ID'=>"Idaho",'IL'=>"Illinois", 'IN'=>"Indiana", 'IA'=>"Iowa",  
+						'KS'=>"Kansas",'KY'=>"Kentucky",'LA'=>"Louisiana",'ME'=>"Maine",'MD'=>"Maryland", 
+						'MA'=>"Massachusetts",'MI'=>"Michigan",'MN'=>"Minnesota",'MS'=>"Mississippi",
+						'MO'=>"Missouri",'MT'=>"Montana",'NE'=>"Nebraska",'NV'=>"Nevada",'NH'=>"New Hampshire",
+						'NJ'=>"New Jersey",'NM'=>"New Mexico",'NY'=>"New York",'NC'=>"North Carolina",
+						'ND'=>"North Dakota",'OH'=>"Ohio",'OK'=>"Oklahoma", 'OR'=>"Oregon",'PA'=>"Pennsylvania",
+						'RI'=>"Rhode Island",'SC'=>"South Carolina",'SD'=>"South Dakota",'TN'=>"Tennessee",
+						'TX'=>"Texas",'UT'=>"Utah",'VT'=>"Vermont",'VA'=>"Virginia",'WA'=>"Washington",
+						'WV'=>"West Virginia",'WI'=>"Wisconsin",'WY'=>"Wyoming"
+	);
+	
+	function showOptionsDrop($array){
+        $state = htmlentities($_SESSION['user']['billingState'], ENT_QUOTES, 'UTF-8');
+		$string = '';
+        foreach($array as $k => $v){ 
+			$s = '';
+			if ($k === $state)
+			{
+				$s = ' selected="selected"';
+			}
+			$string .= '<option value="'.$k.'"'.$s.'>'.$v.'</option>'."\n";
+        }
+        return $string;
+    }
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -262,7 +290,7 @@
 
 		<!-- Intro -->
 			<div id="intro-wrapper" class="wrapper style3">
-				<div class="title">Edit Account</div>
+				<div class="title">Profile</div>
 						<section class="highlight">
 							<form action="profile.php" method="post">
 								<h3><?php echo htmlentities($_SESSION['user']['firstName'], ENT_QUOTES, 'UTF-8'); ?> <?php echo htmlentities($_SESSION['user']['lastName'], ENT_QUOTES, 'UTF-8'); ?></h3>
@@ -275,16 +303,29 @@
 								<label for="billingAddress1">Billing Address:</label>
 								<input type="text" name="billingAddress1" value="<?php echo htmlentities($_SESSION['user']['billingAddress1'], ENT_QUOTES, 'UTF-8'); ?>" />
 								<input type="text" name="billingAddress2" value="<?php echo htmlentities($_SESSION['user']['billingAddress2'], ENT_QUOTES, 'UTF-8'); ?>" />
-								<label for="billingCity">City:</label>
-								<input type="text" name="billingCity" value="<?php echo htmlentities($_SESSION['user']['billingCity'], ENT_QUOTES, 'UTF-8'); ?>" />
-								<label for="billingState">State:</label>
-								<input type="text" name="billingState" value="<?php echo htmlentities($_SESSION['user']['billingState'], ENT_QUOTES, 'UTF-8'); ?>" />
-								<label for="billingPostalCode">Postal Code:</label>
-								<input type="text" name="billingPostalCode" value="<?php echo htmlentities($_SESSION['user']['billingPostalCode'], ENT_QUOTES, 'UTF-8'); ?>" />
-								<label for="phone">Phone Number:</label>
-								<input type="tel" name="phone" value="<?php echo htmlentities($_SESSION['user']['phone'], ENT_QUOTES, 'UTF-8'); ?>" />
-								<label for="birthDate">Birth Date:</label>
-								<input type="date" name="birthDate" value="<?php echo htmlentities($_SESSION['user']['birthDate'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<div class="thirds">
+									<label for="billingCity">City:</label>
+									<input type="text" name="billingCity" value="<?php echo htmlentities($_SESSION['user']['billingCity'], ENT_QUOTES, 'UTF-8'); ?>" />
+								</div>
+								<div class="thirds">
+									<label for="billingState">State:</label>
+									<select name="billingState" value="">
+										<option value="0">Choose a state</option>
+										<?php echo showOptionsDrop($states_arr); ?>
+									</select>
+								</div>
+								<div class="thirds">
+									<label for="billingPostalCode">Postal Code:</label>
+									<input type="text" name="billingPostalCode" value="<?php echo htmlentities($_SESSION['user']['billingPostalCode'], ENT_QUOTES, 'UTF-8'); ?>" />
+								</div>
+								<div class="halves">
+									<label for="phone">Phone Number:</label>
+									<input type="tel" name="phone" value="<?php echo htmlentities($_SESSION['user']['phone'], ENT_QUOTES, 'UTF-8'); ?>" />
+								</div>
+								<div class="halves">
+									<label for="birthDate">Birth Date:</label>
+									<input type="date" name="birthDate" value="<?php echo htmlentities($_SESSION['user']['birthDate'], ENT_QUOTES, 'UTF-8'); ?>" />
+								</div>
 								<ul class="actions">
 									<li><input class="button style1 big" type="submit" value="Update Account" /></li>
 								</ul>

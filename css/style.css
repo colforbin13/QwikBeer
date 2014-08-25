@@ -250,6 +250,20 @@
 					border: 0;
 				}
 
+		.thirds
+		{
+			float: left;
+			width: 33%;
+			padding-right: 3%;
+		}
+
+		.halves
+		{
+			float: left;
+			width: 47%;
+			padding-right: 3%;
+		}
+
 	/* Section/Article */
 
 		section,
