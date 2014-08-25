@@ -6,17 +6,17 @@
 					<div class="row oneandhalf">
 						<div class="4u">
 							<section class="highlight">
-								<a href="#" class="image featured"><img src="images/Android_App_Store_Logo.jpg" alt="" /></a>
+								<a href="#" class="image"><img src="images/Android_App_Store_Logo.jpg" alt="" /></a>
 							</section>
 						</div>
 						<div class="4u">
 							<section class="highlight">
-								<a href="#" class="image featured"><img src="images/ios_app_store.jpg" alt="" /></a>
+								<a href="#" class="image"><img src="images/ios_app_store.jpg" alt="" /></a>
 							</section>
 						</div>
 						<div class="4u">
 							<section class="highlight">
-								<a href="#" class="image featured"><img src="images/BB_World.png" alt="" /></a>
+								<a href="#" class="image"><img src="images/BB_World.png" alt="" /></a>
 							</section>
 						</div>
 					</div>				

@@ -175,6 +175,7 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 	</head>
 	<body class="homepage">
+	<?php //print_r($_SESSION); ?>
 
 		<!-- Header -->
 			<div id="header-wrapper" class="wrapper">
@@ -196,12 +197,20 @@
 				<div class="title">Edit Account</div>
 						<section class="highlight">
 							<form action="edit_account.php" method="post">
+								<h3><?php echo htmlentities($_SESSION['user']['firstName'], ENT_QUOTES, 'UTF-8'); ?> <?php echo htmlentities($_SESSION['user']['lastName'], ENT_QUOTES, 'UTF-8'); ?></h3>
 								<label for="username">Username:</label>
 								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>" readonly />
 								<label for="password">E-Mail Address:</label>
 								<input type="email" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" />
 								<label for="password">Password: <i>(leave blank if you do not want to change your password)</i></label>
 								<input type="password" name="password" value="" />
+								<label for="username">Billing Address:</label>
+								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['billingAddress1'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['billingAddress2'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<label for="username">City:</label>
+								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['billingCity'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<label for="username">State:</label>
+								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['billingState'], ENT_QUOTES, 'UTF-8'); ?>" />
 								<input class="button style1 big" type="submit" value="Update Account" />
 							</form>
 						</section>

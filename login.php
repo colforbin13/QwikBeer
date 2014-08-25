@@ -20,7 +20,17 @@
                 username,
                 password,
                 salt,
-                email
+                email,
+				firstName,
+				lastName,
+				billingAddress1,
+				billingAddress2,
+				billingCity,
+				billingState,
+				billingPostalCode,
+				billingCountry,
+				phone,
+				birthDate
             FROM users
             WHERE
                 username = :username
@@ -158,7 +168,10 @@
 								<input type="text" name="username" value="<?php echo $submitted_username; ?>" />
 								<label for="password">Password</label>
 								<input type="password" name="password" value="" />
-								<input class="button style1 big" type="submit" value="Login" /><a class="button style1 big" href="register.php">Register</a>
+								<ul class="actions">
+									<li><input class="button style1 big" type="submit" value="Login" /></li>
+									<li><a class="button style1 big" href="register.php">Register</a></li>
+								</ul>
 							</form>
 						</section>
 				</div>
