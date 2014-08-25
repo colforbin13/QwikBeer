@@ -10,7 +10,7 @@
     }
 	else
 	{
-		$logInOutText = "<a href=\"#\">" .  htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8') . "</a>" . 
+		$logInOutText = "<a href=\"profile.php\">" .  htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8') . "</a>" . 
 						"<ul><li><a href=\"profile.php\">Profile</a></li><li><a href=\"logout.php\">Log Out</a></li></ul>";
 	}
 ?>

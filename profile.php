@@ -84,8 +84,16 @@
 
         // Initial query parameter values
         $query_params = array(
-            ':email' => $_POST['email'],
             ':user_id' => $_SESSION['user']['id'],
+			':email' => $_POST['email'],
+			':billingAddress1' => $_POST['billingAddress1'],
+			':billingAddress2' => $_POST['billingAddress2'],
+			':billingCity' => $_POST['billingCity'],
+			':billingState' => $_POST['billingState'],
+			':billingPostalCode' => $_POST['billingPostalCode'],
+			':billingCountry' => 'USA',
+			':birthDate' => $_POST['birthDate'],
+			':phone' => $_POST['phone']
         );
 
         // If the user is changing their password, then we need parameter values
@@ -102,7 +110,15 @@
         $query = "
             UPDATE users
             SET
-                email = :email
+                email = :email,
+				billingAddress1 = :billingAddress1,
+				billingAddress2 = :billingAddress2,
+				billingCity = :billingCity,
+				billingState = :billingState,
+				billingPostalCode = :billingPostalCode,
+				billingCountry = :billingCountry,
+				birthDate = :birthDate,
+				phone = :phone
         ";
 
         // If the user is changing their password, then we extend the SQL query
@@ -140,14 +156,66 @@
         $_SESSION['user']['email'] = $_POST['email'];
 
         // This redirects the user back to the members-only page after they register
-        header("Location: inventory.php");
+        header("Location: profile.php");
 
         // Calling die or exit after performing a redirect using the header function
         // is critical.  The rest of your PHP script will continue to execute and
         // will be sent to the user if you do not die or exit.
-        die("Redirecting to inventory.php");
+        die("Redirecting to profile.php");
     }
+	else
+	{
+		//Get user information from the database
+		$query = "
+            SELECT
+                id,
+                username,
+                password,
+                salt,
+                email,
+				firstName,
+				lastName,
+				billingAddress1,
+				billingAddress2,
+				billingCity,
+				billingState,
+				billingPostalCode,
+				billingCountry,
+				phone,
+				birthDate
+            FROM users
+            WHERE
+                username = :username
+			";
 
+        // The parameter values
+        $query_params = array(
+            ':username' => htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8')
+        );
+
+        try
+        {
+            // Execute the query against the database
+            $stmt = $db->prepare($query);
+            $result = $stmt->execute($query_params);
+        }
+        catch(PDOException $ex)
+        {
+            // Note: On a production website, you should not output $ex->getMessage().
+            // It may provide an attacker with helpful information about your code.
+            die("Failed to run query: " . $ex->getMessage());
+        }
+		//Refresh the session data with the latest from the Database
+		$row = $stmt->fetch();
+		unset($row['salt']);
+		unset($row['password']);
+
+		// This stores the user's data into the session at the index 'user'.
+		// We will check this index on the private members-only page to determine whether
+		// or not the user is logged in.  We can also use it to retrieve
+		// the user's details.
+		$_SESSION['user'] = $row;
+	}
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -196,22 +264,30 @@
 			<div id="intro-wrapper" class="wrapper style3">
 				<div class="title">Edit Account</div>
 						<section class="highlight">
-							<form action="edit_account.php" method="post">
+							<form action="profile.php" method="post">
 								<h3><?php echo htmlentities($_SESSION['user']['firstName'], ENT_QUOTES, 'UTF-8'); ?> <?php echo htmlentities($_SESSION['user']['lastName'], ENT_QUOTES, 'UTF-8'); ?></h3>
 								<label for="username">Username:</label>
 								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?>" readonly />
-								<label for="password">E-Mail Address:</label>
+								<label for="email">E-Mail Address:</label>
 								<input type="email" name="email" value="<?php echo htmlentities($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>" />
 								<label for="password">Password: <i>(leave blank if you do not want to change your password)</i></label>
 								<input type="password" name="password" value="" />
-								<label for="username">Billing Address:</label>
-								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['billingAddress1'], ENT_QUOTES, 'UTF-8'); ?>" />
-								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['billingAddress2'], ENT_QUOTES, 'UTF-8'); ?>" />
-								<label for="username">City:</label>
-								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['billingCity'], ENT_QUOTES, 'UTF-8'); ?>" />
-								<label for="username">State:</label>
-								<input type="text" name="username" value="<?php echo htmlentities($_SESSION['user']['billingState'], ENT_QUOTES, 'UTF-8'); ?>" />
-								<input class="button style1 big" type="submit" value="Update Account" />
+								<label for="billingAddress1">Billing Address:</label>
+								<input type="text" name="billingAddress1" value="<?php echo htmlentities($_SESSION['user']['billingAddress1'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<input type="text" name="billingAddress2" value="<?php echo htmlentities($_SESSION['user']['billingAddress2'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<label for="billingCity">City:</label>
+								<input type="text" name="billingCity" value="<?php echo htmlentities($_SESSION['user']['billingCity'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<label for="billingState">State:</label>
+								<input type="text" name="billingState" value="<?php echo htmlentities($_SESSION['user']['billingState'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<label for="billingPostalCode">Postal Code:</label>
+								<input type="text" name="billingPostalCode" value="<?php echo htmlentities($_SESSION['user']['billingPostalCode'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<label for="phone">Phone Number:</label>
+								<input type="tel" name="phone" value="<?php echo htmlentities($_SESSION['user']['phone'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<label for="birthDate">Birth Date:</label>
+								<input type="date" name="birthDate" value="<?php echo htmlentities($_SESSION['user']['birthDate'], ENT_QUOTES, 'UTF-8'); ?>" />
+								<ul class="actions">
+									<li><input class="button style1 big" type="submit" value="Update Account" /></li>
+								</ul>
 							</form>
 						</section>
 				</div>

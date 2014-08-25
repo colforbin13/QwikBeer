@@ -180,7 +180,7 @@
 				-webkit-appearance: none;
 				display: block;
 				border: 0;
-				background: #eee;
+				background: rgba(255,255,255,0.5);
 				box-shadow: inset 0px 0px 1px 0px #a0a1a7;
 				border-radius: 0.35em;
 				width: 100%;

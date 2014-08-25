@@ -115,15 +115,35 @@
         // protect against SQL injection attacks.
         $query = "
             INSERT INTO users (
-                username,
+                firstName,
+				lastName,
+				username,
                 password,
                 salt,
-                email
+                email,
+				billingAddress1,
+				billingAddress2,
+				billingCity,
+				billingState,
+				billingPostalCode,
+				billingCountry,
+				birthDate,
+				phone
             ) VALUES (
-                :username,
+                :firstName,
+				:lastName,
+				:username,
                 :password,
                 :salt,
-                :email
+                :email,
+				:billingAddress1,
+				:billingAddress2,
+				:billingCity,
+				:billingState,
+				:billingPostalCode,
+				:billingCountry,
+				:birthDate,
+				:phone
             )
         ";
         
@@ -161,7 +181,17 @@
             ':username' => $_POST['username'],
             ':password' => $password,
             ':salt' => $salt,
-            ':email' => $_POST['email']
+            ':email' => $_POST['email'],
+            ':firstName' => $_POST['firstName'],
+            ':lastName' => $_POST['lastName'],
+			':billingAddress1' => $_POST['billingAddress1'],
+			':billingAddress2' => $_POST['billingAddress2'],
+			':billingCity' => $_POST['billingCity'],
+			':billingState' => $_POST['billingState'],
+			':billingPostalCode' => $_POST['billingPostalCode'],
+			':billingCountry' => 'USA',
+			':birthDate' => $_POST['birthDate'],
+			':phone' => $_POST['phone']
         );
         
         try
@@ -234,13 +264,32 @@
 				<div class="title">Login</div>
 						<section class="highlight">
 							<form action="register.php" method="post">
+								<label for="firstName">First Name:</label>
+								<input type="text" name="firstName" value="" />
+								<label for="lastName">Last Name:</label>
+								<input type="text" name="lastName" value="" />
 								<label for="username">Username:</label>
 								<input type="text" name="username" value="" />
 								<label for="email">E-Mail:</label>
 								<input type="email" name="email" value="" />
 								<label for="password">Password:</label>
 								<input type="password" name="password" value="" />
-								<input class="button style1 big" type="submit" value="Register" />
+								<label for="billingAddress1">Billing Address:</label>
+								<input type="text" name="billingAddress1" value="" />
+								<input type="text" name="billingAddress2" value="" />
+								<label for="billingCity">City:</label>
+								<input type="text" name="billingCity" value="" />
+								<label for="billingState">State:</label>
+								<input type="text" name="billingState" value="" />
+								<label for="billingPostalCode">Postal Code:</label>
+								<input type="text" name="billingPostalCode" value="" />
+								<label for="phone">Phone Number:</label>
+								<input type="tel" name="phone" value="" />
+								<label for="birthDate">Birth Date:</label>
+								<input type="date" name="birthDate" value="" />
+								<ul>
+									<li><input class="button style1 big" type="submit" value="Register" /></li>
+								</ul>
 							</form>
 						</section>
 				</div>
