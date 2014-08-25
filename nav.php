@@ -14,12 +14,12 @@
 						"<ul><li><a href=\"profile.php\">Profile</a></li><li><a href=\"logout.php\">Log Out</a></li></ul>";
 	}
 ?>
-<!-- Nav -->
+					<!-- Nav -->
 						<nav id="nav">
 							<ul>
 								<li class="current"><a href="index.php">Home</a></li>
 								<li><a href="cart.php">Cart</a></li>
-								<li><a href="http://www.qwikbeer.com/blog/">Blog</a></li>
+								<li><a href="http://www.qwikbeer.com/beta/blog/">Blog</a></li>
 								<li><a href="#">How It Works</a></li>
 								<li>
 									<a href="">About Us</a>

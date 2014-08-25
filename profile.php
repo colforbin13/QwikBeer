@@ -53,7 +53,7 @@
             {
                 // Note: On a production website, you should not output $ex->getMessage().
                 // It may provide an attacker with helpful information about your code.
-                die("Failed to run query: " . $ex->getMessage());
+                die();//"Failed to run query: " . $ex->getMessage());
             }
 
             // Retrieve results (if any)
@@ -148,7 +148,7 @@
         {
             // Note: On a production website, you should not output $ex->getMessage().
             // It may provide an attacker with helpful information about your code.
-            die("Failed to run query: " . $ex->getMessage());
+            die();//"Failed to run query: " . $ex->getMessage());
         }
 
         // Now that the user's E-Mail address has changed, the data stored in the $_SESSION
@@ -203,7 +203,7 @@
         {
             // Note: On a production website, you should not output $ex->getMessage().
             // It may provide an attacker with helpful information about your code.
-            die("Failed to run query: " . $ex->getMessage());
+            die();//"Failed to run query: " . $ex->getMessage());
         }
 		//Refresh the session data with the latest from the Database
 		$row = $stmt->fetch();

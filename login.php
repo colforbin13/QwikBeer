@@ -51,7 +51,7 @@
         {
             // Note: On a production website, you should not output $ex->getMessage().
             // It may provide an attacker with helpful information about your code.
-            die("Failed to run query: " . $ex->getMessage());
+            die();//"Failed to run query: " . $ex->getMessage());
         }
 
         // This variable tells us whether the user has successfully logged in or not.
@@ -162,18 +162,18 @@
 		<!-- Intro -->
 			<div id="intro-wrapper" class="wrapper style3">
 				<div class="title">Login</div>
-						<section class="highlight">
-							<form action="login.php" method="post">
-								<label for="username">Username</label>
-								<input type="text" name="username" value="<?php echo $submitted_username; ?>" />
-								<label for="password">Password</label>
-								<input type="password" name="password" value="" />
-								<ul class="actions">
-									<li><input class="button style1 big" type="submit" value="Login" /></li>
-									<li><a class="button style1 big" href="register.php">Register</a></li>
-								</ul>
-							</form>
-						</section>
+					<section class="highlight">
+						<form action="login.php" method="post">
+							<label for="username">Username</label>
+							<input type="text" name="username" value="<?php echo $submitted_username; ?>" />
+							<label for="password">Password</label>
+							<input type="password" name="password" value="" />
+							<ul class="actions">
+								<li><input class="button style1 big" type="submit" value="Login" /></li>
+								<li><a class="button style1 big" href="register.php">Register</a></li>
+							</ul>
+						</form>
+					</section>
 				</div>
 			</div>
 
